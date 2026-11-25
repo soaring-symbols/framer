@@ -3,12 +3,15 @@
 <!-- The Description is pasted into Framer as plain text: bold lines stand in for headings, and URLs stay bare -->
 <!-- markdownlint-disable no-emphasis-as-heading no-bare-urls -->
 
-The text and images for the submission form at https://www.framer.com/marketplace/plugins/, with `plugin.zip` from `npm run pack`. Keep this file in step with what is live once the plugin is published.
+The text and images for the submission form at https://www.framer.com/marketplace/plugins/, with `plugin.zip` from `npm run pack`. A plugin is published as soon as it is submitted; there is no review. Keep this file in step with what is live once the plugin is published.
 
 ## Images
 
-- Icon: `public/icon.svg`, which `framer.json` points at, and `store/icon.png` (128×128) where the form asks for an image. Both come from [soaring-symbols/brand](https://github.com/soaring-symbols/brand); change them there first.
-- Screenshots: not made yet. Take them in Framer once the plugin runs there.
+- Icon: `public/icon.svg`, which `framer.json` points at, and `store/icon.png` (128×128) where the form asks for an image.
+- Thumbnail: `store/thumbnail.png` (1920×1080).
+- Screenshots (1600×1200): `store/screenshot-marks-light.png` and `store/screenshot-marks-dark.png`, an airline's marks in the light and dark themes, and `store/screenshot-search-light.png`, the list.
+
+All are copied from `exports/framer/` in [soaring-symbols/brand](https://github.com/soaring-symbols/brand), which renders them; change them there first. Framer publishes no required sizes; its best practices ask for images that show the plugin with little text.
 
 ## Name
 
