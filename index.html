@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="icon" type="image/svg+xml" href="/icon.svg" />
+        <title>Soaring Symbols</title>
+    </head>
+    <body>
+        <section id="list-view">
+            <header>
+                <input
+                    id="search"
+                    class="search"
+                    type="search"
+                    placeholder="Search airlines or alliances by name or code"
+                    autocomplete="off"
+                    spellcheck="false"
+                    autofocus
+                />
+            </header>
+        </section>
+        <section id="detail-view" hidden>
+            <header>
+                <button
+                    id="back"
+                    class="icon-button"
+                    title="Back to the list"
+                    aria-label="Back to the list"
+                >
+                    ←
+                </button>
+                <div class="detail-title">
+                    <h1 id="detail-name"></h1>
+                    <div id="detail-meta" class="secondary"></div>
+                </div>
+            </header>
+            <div class="controls">
+                <label>
+                    Size
+                    <select id="size"></select>
+                </label>
+            </div>
+        </section>
+        <div id="read-only" class="notice" hidden>
+            You can only view this project, so marks can't be added to it.
+        </div>
+        <main id="content"></main>
+        <footer>
+            Click a mark to insert it (it replaces a selected SVG), or drag it
+            onto the canvas.
+            <a
+                href="https://soaringsymbols.org"
+                target="_blank"
+                rel="noreferrer"
+                >soaringsymbols.org</a
+            >
+        </footer>
+        <script type="module" src="/src/main.ts"></script>
+    </body>
+</html>

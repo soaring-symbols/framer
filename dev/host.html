@@ -1,0 +1,84 @@
+<!doctype html>
+<!--
+    A stand-in for the Framer editor, to try the plugin's UI in a browser:
+    it answers the plugin's handshake, logs every framer.* call and resolves
+    it with null. Open /dev/host.html on the dev server, or copy it into
+    dist/ and open it there; ?readonly=1 denies addSVG, as for a viewer.
+-->
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <title>Fake Framer host</title>
+        <style>
+            body {
+                margin: 0;
+                display: flex;
+                font: 12px system-ui;
+            }
+            iframe {
+                width: 360px;
+                height: 560px;
+                border: 1px solid #ccc;
+            }
+            pre {
+                flex: 1;
+                margin: 0;
+                padding: 8px;
+                height: 560px;
+                overflow: auto;
+                background: #f7f7f7;
+            }
+        </style>
+    </head>
+    <body>
+        <iframe id="f" src="/"></iframe>
+        <pre id="log"></pre>
+        <script>
+            const allow =
+                new URLSearchParams(location.search).get('readonly') !== '1'
+            const permissionMap = {
+                addSVG: allow,
+                onDragEnd: true,
+                onDragStart: true,
+                onDrag: true,
+                setDragData: true,
+                preloadDetachedComponentLayers: true,
+                preloadImageUrlForInsertion: true,
+                preloadDragPreviewImage: true,
+            }
+            window.calls = []
+            const log = (m) => {
+                document.getElementById('log').textContent += m + '\n'
+            }
+            addEventListener('message', (e) => {
+                const d = e.data,
+                    src = e.source
+                if (d?.type === 'pluginReadySignal') {
+                    src.postMessage(
+                        {
+                            type: 'pluginReadyResponse',
+                            mode: 'canvas',
+                            permissionMap,
+                            environmentInfo: null,
+                            theme: null,
+                        },
+                        '*',
+                    )
+                    log('handshake')
+                } else if (d?.type === 'methodInvocation') {
+                    window.calls.push({ name: d.methodName, args: d.args })
+                    const a = JSON.stringify(d.args)
+                    log(
+                        `${d.methodName} ${a.length > 300 ? a.slice(0, 300) + '…' : a}`,
+                    )
+                    src.postMessage(
+                        { type: 'methodResponse', id: d.id, result: null },
+                        '*',
+                    )
+                } else if (d?.type) {
+                    log(`[${d.type}] ${JSON.stringify(d).slice(0, 200)}`)
+                }
+            })
+        </script>
+    </body>
+</html>

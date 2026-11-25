@@ -1,0 +1,40 @@
+{
+  "name": "soaring-symbols-framer",
+  "private": true,
+  "description": "Framer plugin to search airlines and drop their Soaring Symbols logos, icons and tails into designs.",
+  "license": "MIT",
+  "author": {
+    "name": "Anh Thang Bui",
+    "url": "https://anhthang.org"
+  },
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "pack": "framer-plugin-tools pack",
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint . && prettier --check .",
+    "format": "prettier --write .",
+    "test": "node --test \"test/**/*.test.ts\""
+  },
+  "dependencies": {
+    "@framer/plugin": "^5.1.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "soaring-symbols": "^0.6.1"
+  },
+  "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "@types/node": "^26.6.6",
+    "eslint": "^10.15.0",
+    "eslint-config-prettier": "^10.1.8",
+    "framer-plugin-tools": "^1.2.3",
+    "globals": "^17.14.0",
+    "prettier": "^3.10.1",
+    "typescript-eslint": "^8.73.0",
+    "vite": "^8.3.8",
+    "vite-plugin-framer": "^1.1.1",
+    "vite-plugin-mkcert": "^2.1.0"
+  }
+}

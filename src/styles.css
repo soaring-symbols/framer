@@ -1,0 +1,273 @@
+/* On top of @framer/plugin/framer.css, whose --framer-color-* variables
+   follow Framer's light and dark themes */
+
+html,
+body {
+    height: 100%;
+}
+body {
+    display: flex;
+    flex-direction: column;
+    font-size: 12px;
+    line-height: 16px;
+}
+button,
+input,
+select {
+    font: inherit;
+    color: inherit;
+}
+/* framer.css gives every button, input and select a 134 × 30 box; the
+   rows, tiles and search field size themselves */
+.search,
+.airline,
+.tile {
+    width: auto;
+    height: auto;
+}
+header {
+    padding: 8px;
+    border-bottom: 1px solid var(--framer-color-divider, #eee);
+    display: flex;
+    gap: 6px;
+    align-items: center;
+}
+.search {
+    flex: 1;
+    min-width: 0;
+    height: 30px;
+    padding: 0 8px;
+    border: 0;
+    border-radius: 8px;
+    background: var(--framer-color-bg-tertiary, #f3f3f3);
+    outline: none;
+}
+.search:focus {
+    box-shadow: inset 0 0 0 1px var(--framer-color-tint, #09f);
+}
+.icon-button {
+    width: 30px;
+    height: 30px;
+    border: 0;
+    border-radius: 8px;
+    background: transparent;
+    cursor: pointer;
+    font-size: 16px;
+}
+.icon-button:hover {
+    background: var(--framer-color-bg-tertiary, #f3f3f3);
+}
+main {
+    flex: 1;
+    overflow-y: auto;
+}
+.notice {
+    margin: 8px;
+    padding: 6px 8px;
+    border-radius: 8px;
+    background: var(--framer-color-bg-tertiary, #f3f3f3);
+    color: var(--framer-color-text-secondary, #666);
+}
+.empty {
+    padding: 24px 16px;
+    text-align: center;
+    color: var(--framer-color-text-tertiary, #999);
+}
+.airline {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+    padding: 6px 12px;
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+    text-align: left;
+    cursor: pointer;
+}
+.airline:hover,
+.airline:focus-visible {
+    background: var(--framer-color-bg-tertiary, #f3f3f3);
+    outline: none;
+}
+.thumb {
+    width: 28px;
+    height: 28px;
+    flex: none;
+    object-fit: contain;
+}
+.airline-text {
+    flex: 1;
+    min-width: 0;
+}
+.airline-name {
+    font-weight: 600;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.secondary {
+    color: var(--framer-color-text-tertiary, #999);
+}
+.badge {
+    margin-left: 4px;
+    padding: 0 4px;
+    border-radius: 4px;
+    background: var(--framer-color-bg-tertiary, #f3f3f3);
+    color: var(--framer-color-text-secondary, #666);
+    font-size: 10px;
+}
+.detail-title {
+    flex: 1;
+    min-width: 0;
+}
+.detail-title h1 {
+    margin: 0;
+    font-size: 13px;
+    line-height: 18px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.controls {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    padding: 8px 12px;
+    border-bottom: 1px solid var(--framer-color-divider, #eee);
+}
+.controls label {
+    display: flex;
+    gap: 6px;
+    align-items: center;
+}
+.controls select {
+    width: auto;
+    height: 26px;
+    padding: 0 6px;
+    border: 0;
+    border-radius: 6px;
+    background: var(--framer-color-bg-tertiary, #f3f3f3);
+}
+.column-title input[type='color'],
+.swatch {
+    flex: none;
+    width: 18px;
+    height: 18px;
+    padding: 0;
+    border: 1px solid var(--framer-color-divider, #eee);
+    border-radius: 4px;
+    background: none;
+    cursor: pointer;
+}
+.swatch {
+    border-radius: 50%;
+}
+.section-title {
+    margin: 0;
+    padding: 12px 12px 0;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--framer-color-text-secondary, #666);
+}
+.type-title {
+    margin: 0;
+    padding: 8px 12px 4px;
+    font-size: 12px;
+    font-weight: 500;
+}
+.tiles {
+    display: grid;
+    gap: 8px;
+    padding: 0 12px;
+}
+/* The column names stay in view while the marks scroll */
+.column-titles {
+    position: sticky;
+    top: 0;
+    z-index: 1;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    background: var(--framer-color-bg, #fff);
+    border-bottom: 1px solid var(--framer-color-divider, #eee);
+}
+.column-title {
+    display: flex;
+    gap: 4px;
+    align-items: center;
+    min-width: 0;
+    height: 18px;
+    color: var(--framer-color-text-tertiary, #999);
+    font-weight: 500;
+}
+.column-title span {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+#content > .tiles:last-child {
+    padding-bottom: 12px;
+}
+.tile-missing {
+    border: 1px dashed var(--framer-color-divider, #eee);
+    border-radius: 8px;
+}
+.tile {
+    display: flex;
+    padding: 4px;
+    border: 1px solid var(--framer-color-divider, #eee);
+    border-radius: 8px;
+    background: transparent;
+    cursor: grab;
+}
+.tile:hover,
+.tile:focus-visible {
+    border-color: var(--framer-color-tint, #09f);
+    outline: none;
+}
+.tile:disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+}
+.tile-preview {
+    width: 100%;
+    height: 72px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 5px;
+    /* A checkerboard, so white and transparent parts show */
+    --check: var(--framer-color-bg-tertiary, #f3f3f3);
+    background-color: var(--framer-color-bg, #fff);
+    background-image:
+        linear-gradient(45deg, var(--check) 25%, transparent 25%),
+        linear-gradient(-45deg, var(--check) 25%, transparent 25%),
+        linear-gradient(45deg, transparent 75%, var(--check) 75%),
+        linear-gradient(-45deg, transparent 75%, var(--check) 75%);
+    background-size: 12px 12px;
+    background-position:
+        0 0,
+        0 6px,
+        6px -6px,
+        -6px 0;
+}
+/* A mark for dark backgrounds shows on one, as it will be used */
+.tile[data-dark='true'] .tile-preview {
+    background: #1e1e1e;
+}
+.tile-preview img {
+    width: 56px;
+    height: 56px;
+    pointer-events: none;
+}
+footer {
+    padding: 6px 12px;
+    border-top: 1px solid var(--framer-color-divider, #eee);
+    color: var(--framer-color-text-tertiary, #999);
+}
+footer a {
+    color: inherit;
+}
+[hidden] {
+    display: none !important;
+}
