@@ -14,7 +14,7 @@ A Framer plugin that searches the [Soaring Symbols](https://github.com/soaring-s
 - `src/styles.css` — on top of `@framer/plugin/framer.css`, whose `--framer-color-*` variables follow Framer's light and dark themes.
 - `dev/host.html` — a stand-in for the Framer editor, to try the UI in a browser (see Gotchas).
 - `test/` — unit tests for `src/data.ts` and `src/settings.ts`, run by Node's test runner with type stripping.
-- `store/` — what the Marketplace page shows: `LISTING.md` (the text for the submission form) and `icon.png`. `public/icon.svg` is the icon `framer.json` points at, the same square icon as the website's favicon.
+- `store/` — what the Marketplace page shows: `LISTING.md` (the text for the submission form), `icon.png`, `thumbnail.png` and the `screenshot-*.png` (the panel in the light and dark themes), copied from `exports/framer/` in [soaring-symbols/brand](https://github.com/soaring-symbols/brand), where they are rendered; change them there first. Update `LISTING.md` when a feature changes, and the images when the UI does. `public/icon.svg` is the icon `framer.json` points at, the same square icon as the website's favicon.
 
 ### Where the data comes from
 
@@ -44,6 +44,7 @@ Dependencies are tracked in both `package-lock.json` and `bun.lock`; update both
 - Marks only have a square viewBox (`64` for logos, `24` for icons and tails); `sizeSvg` puts `width` and `height` on the root tag so the layer comes in at the chosen size.
 - `framer.addSVG` replaces the selected SVG layer when there is one; the footer says so.
 - `makeDraggable` asks for the drag data synchronously, so a tile becomes draggable only once its SVG has arrived, and its data reads the tile's latest mark (after a size or color change). Each call returns a cleanup, run when the tiles are replaced (`clearTiles`).
+- Tile previews keep a light checkerboard in both themes, so dark marks stay readable; only the Dark background column is dark.
 - `framer.css` gives every `button`, `input` and `select` a 134 × 30 box; the list rows, tiles and search field override it in `styles.css`.
 - Outside Framer, `@framer/plugin` shows its own "This is a Framer Plugin" page instead of the plugin, and inside a page that doesn't answer its handshake it waits forever. To check the UI in a browser, open `dev/host.html`, which answers the handshake and logs every `framer.*` call: on the dev server at `/dev/host.html`, or copied into `dist/` after a build. `?readonly=1` denies `addSVG`.
 - `vite-plugin-mkcert` serves the dev server over HTTPS; the first run creates a local certificate authority and may ask to trust it.
