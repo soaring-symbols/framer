@@ -2,8 +2,7 @@
 
 A Framer plugin to search airlines by name, IATA or ICAO code and drop their [Soaring Symbols](https://github.com/soaring-symbols/soaring-symbols) logos, icons and tails into your designs, along with the marks of airline alliances.
 
-> [!NOTE]
-> The plugin is not on the Framer Marketplace yet. Try it by running it as a development plugin, as described under [Development](#development).
+Get it on the [Framer Marketplace](https://www.framer.com/marketplace/plugins/soaring-symbols/).
 
 - Search 160+ airlines by name, other names they go by (SWISS), IATA or ICAO code, callsign or slug, and alliances (oneworld, SkyTeam, Star Alliance) by name. Cargo airlines are marked "Cargo", and searching "cargo" lists them.
 - Insert a mark by clicking it, or drag it onto the canvas. A clicked mark replaces the selected SVG layer, if there is one.
