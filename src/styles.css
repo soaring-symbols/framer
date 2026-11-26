@@ -17,45 +17,89 @@ select {
     font: inherit;
     color: inherit;
 }
+svg .filled,
+svg.filled {
+    fill: currentColor;
+    stroke: none;
+}
+svg {
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.5;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+:focus-visible {
+    outline: 2px solid var(--framer-color-tint, #09f);
+    outline-offset: 1px;
+}
 /* framer.css gives every button, input and select a 134 × 30 box; the
-   rows, tiles and search field size themselves */
-.search,
+   rows and tiles size themselves (the search field sets its own) */
 .airline,
 .tile {
     width: auto;
     height: auto;
 }
+/* The detail view's only rule is under the size control */
 header {
     padding: 8px;
-    border-bottom: 1px solid var(--framer-color-divider, #eee);
     display: flex;
     gap: 6px;
     align-items: center;
 }
-.search {
+.search-field {
+    position: relative;
     flex: 1;
     min-width: 0;
+    color: var(--framer-color-text-tertiary, #999);
+}
+.search-field svg {
+    position: absolute;
+    left: 9px;
+    top: 8px;
+    width: 14px;
+    height: 14px;
+    pointer-events: none;
+}
+.search {
+    width: 100%;
     height: 30px;
-    padding: 0 8px;
+    padding: 0 8px 0 29px;
     border: 0;
     border-radius: 8px;
     background: var(--framer-color-bg-tertiary, #f3f3f3);
+    color: var(--framer-color-text, #333);
     outline: none;
+    transition: box-shadow 140ms ease-out;
 }
 .search:focus {
-    box-shadow: inset 0 0 0 1px var(--framer-color-tint, #09f);
+    box-shadow:
+        inset 0 0 0 1px var(--framer-color-tint, #09f),
+        0 0 0 3px var(--framer-color-tint-dimmed, rgb(0 153 255 / 0.12));
+}
+.search:focus-visible {
+    outline: none;
 }
 .icon-button {
+    display: grid;
+    place-items: center;
     width: 30px;
     height: 30px;
+    padding: 0;
     border: 0;
     border-radius: 8px;
     background: transparent;
+    color: var(--framer-color-text-secondary, #666);
     cursor: pointer;
-    font-size: 16px;
+    transition: background-color 120ms ease-out;
+}
+.icon-button svg {
+    width: 16px;
+    height: 16px;
 }
 .icon-button:hover {
     background: var(--framer-color-bg-tertiary, #f3f3f3);
+    color: var(--framer-color-text, #333);
 }
 main {
     flex: 1;
@@ -129,38 +173,94 @@ main {
     overflow: hidden;
     text-overflow: ellipsis;
 }
+/* The size and the mono color sit on the same three columns as the pills
+   above them, filled where the pills are outlined */
 .controls {
-    display: flex;
-    gap: 12px;
-    align-items: center;
-    padding: 8px 12px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+    margin: 0 12px;
+    padding: 8px 0 10px;
     border-bottom: 1px solid var(--framer-color-divider, #eee);
 }
-.controls label {
+.mono-field {
+    display: contents;
+}
+.field {
+    position: relative;
     display: flex;
     gap: 6px;
     align-items: center;
-}
-.controls select {
+    min-width: 0;
     width: auto;
-    height: 26px;
-    padding: 0 6px;
+    height: 30px;
+    padding: 0 24px 0 10px;
     border: 0;
-    border-radius: 6px;
+    border-radius: 9px;
     background: var(--framer-color-bg-tertiary, #f3f3f3);
-}
-.column-title input[type='color'],
-.swatch {
-    flex: none;
-    width: 18px;
-    height: 18px;
-    padding: 0;
-    border: 1px solid var(--framer-color-divider, #eee);
-    border-radius: 4px;
-    background: none;
     cursor: pointer;
 }
+.field > svg {
+    position: absolute;
+    right: 6px;
+    top: 7px;
+    width: 16px;
+    height: 16px;
+    color: var(--framer-color-text-tertiary, #999);
+    pointer-events: none;
+}
+.field-label {
+    color: var(--framer-color-text-tertiary, #999);
+}
+/* The select fills its field, so a click anywhere on it opens the list */
+.field select {
+    appearance: none;
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    padding: 0 24px 0 40px;
+    border-radius: 9px;
+    background: transparent;
+    text-overflow: clip;
+    cursor: pointer;
+}
+.field-value {
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: clip;
+    white-space: nowrap;
+    font-variant-numeric: tabular-nums;
+}
+.primary-button {
+    justify-content: center;
+    padding: 0 10px;
+}
+.field input,
 .swatch {
+    flex: none;
+    width: 14px;
+    height: 14px;
+    padding: 0;
+    border: 0;
+    border-radius: 50%;
+    background: none;
+    overflow: hidden;
+    /* A ring that follows the text color, so a dark swatch shows in the
+       dark theme too */
+    box-shadow: inset 0 0 0 1px
+        color-mix(in srgb, var(--framer-color-text, #333) 20%, transparent);
+    cursor: pointer;
+}
+.field input::-webkit-color-swatch-wrapper {
+    padding: 0;
+}
+.field input::-webkit-color-swatch {
+    border: 0;
+    border-radius: 50%;
+}
+.field input::-moz-color-swatch {
+    border: 0;
     border-radius: 50%;
 }
 .section-title {
@@ -170,11 +270,25 @@ main {
     font-weight: 600;
     color: var(--framer-color-text-secondary, #666);
 }
+/* A kind of mark: its name, and what it is on the right */
 .type-title {
-    margin: 0;
-    padding: 8px 12px 4px;
+    display: flex;
+    gap: 8px;
+    align-items: baseline;
+    justify-content: space-between;
+    padding: 12px 12px 6px;
+}
+.type-title h3 {
+    flex: none;
     font-size: 12px;
-    font-weight: 500;
+    font-weight: 600;
+}
+.type-title .secondary {
+    min-width: 0;
+    font-size: 11px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 .tiles {
     display: grid;
@@ -182,23 +296,36 @@ main {
     padding: 0 12px;
 }
 /* The column names stay in view while the marks scroll */
-.column-titles {
+.detail-head {
     position: sticky;
     top: 0;
     z-index: 1;
-    padding-top: 8px;
-    padding-bottom: 8px;
     background: var(--framer-color-bg, #fff);
-    border-bottom: 1px solid var(--framer-color-divider, #eee);
 }
+.column-titles {
+    padding-top: 4px;
+}
+/* Each column's name is a pill */
 .column-title {
     display: flex;
-    gap: 4px;
+    gap: 6px;
     align-items: center;
+    justify-content: center;
     min-width: 0;
-    height: 18px;
-    color: var(--framer-color-text-tertiary, #999);
+    height: 30px;
+    padding: 0 8px;
+    border-radius: 9px;
+    box-shadow: inset 0 0 0 1px var(--framer-color-divider, #eee);
     font-weight: 500;
+}
+.column-title .icon {
+    flex: none;
+    display: flex;
+    color: var(--framer-color-text-secondary, #666);
+}
+.column-title .icon svg {
+    width: 14px;
+    height: 14px;
 }
 .column-title span {
     white-space: nowrap;
@@ -210,36 +337,50 @@ main {
 }
 .tile-missing {
     border: 1px dashed var(--framer-color-divider, #eee);
-    border-radius: 8px;
+    border-radius: 12px;
 }
+/* A frame around the preview: the tile's ring, then a 5px gap */
 .tile {
     display: flex;
-    padding: 4px;
-    border: 1px solid var(--framer-color-divider, #eee);
-    border-radius: 8px;
+    padding: 5px;
+    border: 0;
+    border-radius: 12px;
     background: transparent;
+    box-shadow: inset 0 0 0 1px var(--framer-color-divider, #eee);
     cursor: grab;
+    transition:
+        box-shadow 140ms ease-out,
+        transform 140ms ease-out;
 }
 .tile:hover,
 .tile:focus-visible {
-    border-color: var(--framer-color-tint, #09f);
+    box-shadow:
+        inset 0 0 0 1.5px var(--framer-color-tint, #09f),
+        0 6px 16px -8px rgb(0 0 0 / 0.25);
     outline: none;
+}
+.tile:active {
+    transform: scale(0.97);
+    cursor: grabbing;
 }
 .tile:disabled {
     cursor: not-allowed;
     opacity: 0.5;
+    box-shadow: inset 0 0 0 1px var(--framer-color-divider, #eee);
+    transform: none;
 }
 .tile-preview {
     width: 100%;
-    height: 72px;
+    height: 70px;
     display: flex;
     align-items: center;
     justify-content: center;
-    border-radius: 5px;
+    border-radius: 7px;
+    overflow: hidden;
     /* A light checkerboard in both themes, so white and transparent parts
        show and dark marks stay readable; the dark background version gets
        its own dark preview below */
-    --check: #f0f0f0;
+    --check: #f5f5f5;
     background-color: #fff;
     background-image:
         linear-gradient(45deg, var(--check) 25%, transparent 25%),
@@ -255,20 +396,110 @@ main {
 }
 /* A mark for dark backgrounds shows on one, as it will be used */
 .tile[data-dark='true'] .tile-preview {
-    background: #1e1e1e;
+    background: #262626;
 }
 .tile-preview img {
-    width: 56px;
-    height: 56px;
+    width: 60px;
+    height: 60px;
     pointer-events: none;
+    transition: transform 180ms ease-out;
 }
+.tile:hover .tile-preview img {
+    transform: scale(1.08);
+}
+/* Images fade in once loaded, instead of popping in */
+.fade {
+    opacity: 0;
+    transition: opacity 200ms ease-out;
+}
+.fade.loaded {
+    opacity: 1;
+}
+/* How to use a mark, and the website, in one drop-zone-like line */
 footer {
-    padding: 6px 12px;
-    border-top: 1px solid var(--framer-color-divider, #eee);
+    padding: 4px 12px 10px;
+}
+.hint {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    height: 34px;
+    padding: 0 12px;
+    border: 1px dashed
+        color-mix(
+            in srgb,
+            var(--framer-color-text-tertiary, #999) 45%,
+            transparent
+        );
+    border-radius: 10px;
     color: var(--framer-color-text-tertiary, #999);
 }
-footer a {
+.hint svg {
+    flex: none;
+    width: 16px;
+    height: 16px;
+}
+.hint-copy {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+.hint-copy span {
+    min-width: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.hint a {
+    flex: none;
     color: inherit;
+}
+.hint a:hover {
+    color: var(--framer-color-tint, #09f);
+}
+/* framer.css paints every button, on focus and hover too, and with the
+   control color in its dark theme, with selectors as strong as
+   [data-framer-theme='dark'] button:not(:disabled):hover; these, scoped by
+   id, keep the plugin's own backgrounds */
+#content .airline,
+#content .tile,
+#detail-view .icon-button {
+    background: transparent;
+}
+#content .airline:hover,
+#content .airline:focus-visible,
+#detail-view .icon-button:hover {
+    background: var(--framer-color-bg-tertiary, #f3f3f3);
+}
+#controls .field {
+    background: var(--framer-color-bg-tertiary, #f3f3f3);
+}
+#controls .field:hover {
+    background: color-mix(
+        in srgb,
+        var(--framer-color-text, #333) 10%,
+        var(--framer-color-bg, #fff)
+    );
+}
+/* On the dark theme, the list shows a mark's version for dark
+   backgrounds when it has one */
+.thumb-dark {
+    display: none;
+}
+[data-framer-theme='dark'] .thumb-light {
+    display: none;
+}
+[data-framer-theme='dark'] .thumb-dark {
+    display: block;
+}
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        transition: none !important;
+    }
 }
 [hidden] {
     display: none !important;

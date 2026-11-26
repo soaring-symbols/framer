@@ -42,7 +42,7 @@ Dependencies are tracked in both `package-lock.json` and `bun.lock`; update both
 
 - Mono SVGs are drawn in `currentColor`, so `markFor` replaces it with the chosen color (`tintSvg`) before a mark is inserted or dragged.
 - Marks only have a square viewBox (`64` for logos, `24` for icons and tails); `sizeSvg` puts `width` and `height` on the root tag so the layer comes in at the chosen size.
-- `framer.addSVG` replaces the selected SVG layer when there is one; the footer says so.
+- `framer.addSVG` replaces the selected SVG layer when there is one; each tile's tooltip says so, since the footer only has room for one line.
 - `makeDraggable` asks for the drag data synchronously, so a tile becomes draggable only once its SVG has arrived, and its data reads the tile's latest mark (after a size or color change). Each call returns a cleanup, run when the tiles are replaced (`clearTiles`).
 - Tile previews keep a light checkerboard in both themes, so dark marks stay readable; only the Dark background column is dark.
 - `framer.css` gives every `button`, `input` and `select` a 134 × 30 box; the list rows, tiles and search field override it in `styles.css`.

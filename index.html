@@ -9,15 +9,22 @@
     <body>
         <section id="list-view">
             <header>
-                <input
-                    id="search"
-                    class="search"
-                    type="search"
-                    placeholder="Search airlines or alliances by name or code"
-                    autocomplete="off"
-                    spellcheck="false"
-                    autofocus
-                />
+                <label class="search-field">
+                    <svg viewBox="0 0 16 16" aria-hidden="true">
+                        <circle cx="7" cy="7" r="4.5" />
+                        <path d="m10.5 10.5 3 3" />
+                    </svg>
+                    <input
+                        id="search"
+                        class="search"
+                        type="search"
+                        placeholder="Search airlines and alliances"
+                        aria-label="Search airlines and alliances by name, IATA or ICAO code"
+                        autocomplete="off"
+                        spellcheck="false"
+                        autofocus
+                    />
+                </label>
             </header>
         </section>
         <section id="detail-view" hidden>
@@ -28,18 +35,46 @@
                     title="Back to the list"
                     aria-label="Back to the list"
                 >
-                    ←
+                    <svg viewBox="0 0 16 16" aria-hidden="true">
+                        <path d="M10 3.5 5.5 8l4.5 4.5" />
+                    </svg>
                 </button>
                 <div class="detail-title">
                     <h1 id="detail-name"></h1>
                     <div id="detail-meta" class="secondary"></div>
                 </div>
             </header>
-            <div class="controls">
-                <label>
-                    Size
+            <!-- Moved under the column names when an airline is shown -->
+            <div id="controls" class="controls">
+                <label class="field" title="Size of an inserted mark">
+                    <span class="field-label">Size</span>
                     <select id="size"></select>
+                    <svg viewBox="0 0 16 16" aria-hidden="true">
+                        <path d="m5 6.5 3 3 3-3" />
+                    </svg>
                 </label>
+                <!-- The mono marks' color, under the Mono column's name: a
+                     picker, and the airline's primary color in one click -->
+                <div id="mono-field" class="mono-field">
+                    <label
+                        class="field"
+                        title="Pick the color of the mono marks"
+                    >
+                        <input id="mono" type="color" />
+                        <span id="mono-value" class="field-value"></span>
+                        <svg viewBox="0 0 16 16" aria-hidden="true">
+                            <path d="m5 6.5 3 3 3-3" />
+                        </svg>
+                    </label>
+                    <button
+                        id="primary"
+                        class="field primary-button"
+                        type="button"
+                    >
+                        <span id="primary-swatch" class="swatch"></span>
+                        Primary
+                    </button>
+                </div>
             </div>
         </section>
         <div id="read-only" class="notice" hidden>
@@ -47,14 +82,32 @@
         </div>
         <main id="content"></main>
         <footer>
-            Click a mark to insert it (it replaces a selected SVG), or drag it
-            onto the canvas.
-            <a
-                href="https://soaringsymbols.org"
-                target="_blank"
-                rel="noreferrer"
-                >soaringsymbols.org</a
-            >
+            <!-- One tip per view: what the list can be searched by, how to
+                 use a mark in the detail view -->
+            <div class="hint">
+                <span id="list-hint" class="hint-copy">
+                    <svg viewBox="0 0 16 16" aria-hidden="true">
+                        <circle cx="7" cy="7" r="4.5" />
+                        <path d="m10.5 10.5 3 3" />
+                    </svg>
+                    <span>Try VN, HVN or Vietnam</span>
+                </span>
+                <span id="detail-hint" class="hint-copy" hidden>
+                    <svg viewBox="0 0 16 16" aria-hidden="true">
+                        <path
+                            d="M6.5 1.5h-1m-2 0a1 1 0 0 0-1 1m0 2v1m0 2v1m0 2a1 1 0 0 0 1 1m2 0h1M8.5 1.5h1m2 0a1 1 0 0 1 1 1v1"
+                        />
+                        <path d="m8 7 7 2.5-3 1-1 3z" class="filled" />
+                    </svg>
+                    <span>Click or drag to insert</span>
+                </span>
+                <a
+                    href="https://soaringsymbols.org"
+                    target="_blank"
+                    rel="noreferrer"
+                    >soaringsymbols.org</a
+                >
+            </div>
         </footer>
         <script type="module" src="/src/main.ts"></script>
     </body>
