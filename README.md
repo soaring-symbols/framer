@@ -42,6 +42,10 @@ To try a build instead, run `npm run build`, copy `dev/host.html` into `dist/`, 
 | `npm run lint`      | ESLint and Prettier.                                                   |
 | `npm test`          | Unit tests for `src/data.ts` and `src/settings.ts` (Node test runner). |
 
+## Publishing
+
+How to publish a new version to the Framer Marketplace, from the checks to the upload, is in [`store/PUBLISHING.md`](store/PUBLISHING.md); the listing text and images are in [`store/LISTING.md`](store/LISTING.md).
+
 ## License
 
 The plugin's code is [MIT](LICENSE). The airline marks are trademarks of their owners; read the package's [Disclaimer](https://github.com/soaring-symbols/soaring-symbols/blob/main/DISCLAIMER.md) before using them.

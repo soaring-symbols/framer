@@ -14,7 +14,7 @@ A Framer plugin that searches the [Soaring Symbols](https://github.com/soaring-s
 - `src/styles.css` — on top of `@framer/plugin/framer.css`, whose `--framer-color-*` variables follow Framer's light and dark themes.
 - `dev/host.html` — a stand-in for the Framer editor, to try the UI in a browser (see Gotchas).
 - `test/` — unit tests for `src/data.ts` and `src/settings.ts`, run by Node's test runner with type stripping.
-- `store/` — what the Marketplace page shows: `LISTING.md` (the text for the submission form), `icon.png`, `thumbnail.png` and the `screenshot-*.png` (the panel in the light and dark themes), copied from `exports/framer/` in [soaring-symbols/brand](https://github.com/soaring-symbols/brand), where they are rendered; change them there first. Update `LISTING.md` when a feature changes, and the images when the UI does. `public/icon.svg` is the icon `framer.json` points at, the same square icon as the website's favicon.
+- `store/` — what the Marketplace page shows: `LISTING.md` (the text for the submission form), `PUBLISHING.md` (how to publish a new version, step by step), `icon.png`, `thumbnail.png` and the `screenshot-*.png` (the panel in the light and dark themes), copied from `exports/framer/` in [soaring-symbols/brand](https://github.com/soaring-symbols/brand), where they are rendered; change them there first. Update `LISTING.md` when a feature changes, and the images when the UI does. `public/icon.svg` is the icon `framer.json` points at, the same square icon as the website's favicon.
 
 ### Where the data comes from
 
