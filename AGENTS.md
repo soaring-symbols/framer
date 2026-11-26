@@ -46,7 +46,7 @@ Dependencies are tracked in both `package-lock.json` and `bun.lock`; update both
 - `makeDraggable` asks for the drag data synchronously, so a tile becomes draggable only once its SVG has arrived, and its data reads the tile's latest mark (after a size or color change). Each call returns a cleanup, run when the tiles are replaced (`clearTiles`).
 - Tile previews keep a light checkerboard in both themes, so dark marks stay readable; only the Dark background column is dark.
 - `framer.css` gives every `button`, `input` and `select` a 134 × 30 box; the list rows, tiles and search field override it in `styles.css`.
-- Outside Framer, `@framer/plugin` shows its own "This is a Framer Plugin" page instead of the plugin, and inside a page that doesn't answer its handshake it waits forever. To check the UI in a browser, open `dev/host.html`, which answers the handshake and logs every `framer.*` call: on the dev server at `/dev/host.html`, or copied into `dist/` after a build. `?readonly=1` denies `addSVG`.
+- Outside Framer, `@framer/plugin` shows its own "This is a Framer Plugin" page instead of the plugin, and inside a page that doesn't answer its handshake it waits forever. To check the UI in a browser, open `dev/host.html`, which answers the handshake and logs every `framer.*` call: on the dev server at `/dev/host.html`, or copied into `dist/` after a build. `?readonly=1` denies `addSVG`, and `?theme=dark` hands over Framer's dark theme (its mode and color tokens, which `@framer/plugin` sets on the body).
 - `vite-plugin-mkcert` serves the dev server over HTTPS; the first run creates a local certificate authority and may ask to trust it.
 
 ## Conventions

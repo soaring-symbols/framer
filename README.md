@@ -23,7 +23,15 @@ npm run dev
 
 Open a project in Framer, in the browser or the desktop app, and choose **Plugins → Developer Tools → Open Development Plugin**. Framer loads the plugin from the dev server and reloads it on every change. The first run of the dev server sets up a local HTTPS certificate and may ask you to trust it.
 
-To look at the UI without Framer, open `https://localhost:5173/dev/host.html`, a stand-in for the editor that logs what the plugin asks Framer to do.
+### Try the UI without Framer
+
+`dev/host.html` stands in for the editor: it loads the plugin in a 360 × 560 frame, answers it as Framer does and logs every call the plugin makes, such as the SVG a click would insert. With `npm run dev` running, open:
+
+- `https://localhost:5173/dev/host.html` for the light theme,
+- `https://localhost:5173/dev/host.html?theme=dark` for Framer's dark theme,
+- `https://localhost:5173/dev/host.html?readonly=1` for someone who can only view the project.
+
+To try a build instead, run `npm run build`, copy `dev/host.html` into `dist/`, serve `dist/` (for example `python3 -m http.server --directory dist`) and open `/host.html` there.
 
 | Command             | What it does                                                           |
 | :------------------ | :--------------------------------------------------------------------- |

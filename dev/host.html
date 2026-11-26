@@ -3,7 +3,8 @@
     A stand-in for the Framer editor, to try the plugin's UI in a browser:
     it answers the plugin's handshake, logs every framer.* call and resolves
     it with null. Open /dev/host.html on the dev server, or copy it into
-    dist/ and open it there; ?readonly=1 denies addSVG, as for a viewer.
+    dist/ and open it there; ?readonly=1 denies addSVG, as for a viewer, and
+    ?theme=dark hands the plugin Framer's dark theme, as the editor does.
 -->
 <html>
     <head>
@@ -34,8 +35,27 @@
         <iframe id="f" src="/"></iframe>
         <pre id="log"></pre>
         <script>
-            const allow =
-                new URLSearchParams(location.search).get('readonly') !== '1'
+            const params = new URLSearchParams(location.search)
+            const allow = params.get('readonly') !== '1'
+            // The theme the editor hands the plugin: its mode, and the color
+            // tokens @framer/plugin sets on the body
+            const theme =
+                params.get('theme') === 'dark'
+                    ? {
+                          mode: 'dark',
+                          tokens: {
+                              '--framer-color-bg': '#111111',
+                              '--framer-color-bg-secondary': '#1a1a1a',
+                              '--framer-color-bg-tertiary': '#2b2b2b',
+                              '--framer-color-divider': '#2b2b2b',
+                              '--framer-color-text': '#ffffff',
+                              '--framer-color-text-secondary': '#bbbbbb',
+                              '--framer-color-text-tertiary': '#888888',
+                              '--framer-color-control': '#333333',
+                              '--framer-color-control-hover': '#444444',
+                          },
+                      }
+                    : null
             const permissionMap = {
                 addSVG: allow,
                 onDragEnd: true,
@@ -60,7 +80,7 @@
                             mode: 'canvas',
                             permissionMap,
                             environmentInfo: null,
-                            theme: null,
+                            theme,
                         },
                         '*',
                     )
